@@ -1,0 +1,31 @@
+{
+    "configurations": [
+        {
+            "name": "PlatformIO (deprecated)",
+            "includePath": [
+                "${workspaceFolder}/Core/Inc",
+                "${workspaceFolder}/Drivers/STM32L0xx_HAL_Driver/Inc",
+                "${workspaceFolder}/Drivers/STM32L0xx_HAL_Driver/Inc/Legacy",
+                "${workspaceFolder}/Drivers/CMSIS/Device/ST/STM32L0xx/Include",
+                "${workspaceFolder}/Drivers/CMSIS/Include"
+            ],
+            "browse": {
+                "limitSymbolsToIncludedHeaders": true,
+                "path": [
+
+                ]
+            },
+            "defines": [
+                "USE_HAL_DRIVER",
+                "STM32L072xx"
+            ],
+            "cStandard": "c17",
+            "forcedInclude": [
+
+            ],
+            "compilerPath": "/usr/bin/arm-none-eabi-gcc",
+            "intelliSenseMode": "gcc-arm"
+        }
+    ],
+    "version": 4
+}
