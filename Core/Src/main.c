@@ -24,6 +24,9 @@
 
 #include <string.h>
 #include <stdio.h>
+#include <errno.h>
+
+#include "app.h"
 
 /* USER CODE END Includes */
 
@@ -65,6 +68,26 @@ static void MX_USART2_UART_Init(void);
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
 
+int _write(int fd, char *ptr, int len)
+{
+  int ret;
+
+  HAL_StatusTypeDef dev_ret;
+  /* stdout, stderr */
+  if (fd == 1 || fd == 2) {
+    dev_ret = HAL_UART_Transmit(&huart2, (uint8_t *)ptr, len, 0xFFFFu);
+    if (dev_ret == HAL_OK) {
+        ret = len;
+    } else {
+        ret = -EIO;
+    }
+  } else {
+	  ret = -EBADF;
+  }
+
+  return ret;
+}
+
 /* USER CODE END 0 */
 
 /**
@@ -100,23 +123,17 @@ int main(void)
   MX_USART2_UART_Init();
   /* USER CODE BEGIN 2 */
 
-  char buffer[0x100u];
-
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
 
-  uint32_t cnt = 0u;
-
   while (1)
   {
-    snprintf(buffer, sizeof(buffer), "Hello cnt: %lu\n", cnt);
-    HAL_UART_Transmit(&huart2, (uint8_t *)buffer, strlen(buffer), 0xFFFFu);
-
-    cnt++;
-
-    HAL_Delay(1000u);
+    char chr;
+    if (HAL_UART_Receive(&huart2, (uint8_t *)&chr, 1u, 0u) == HAL_OK) {
+      app_shell(chr);
+    }
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */

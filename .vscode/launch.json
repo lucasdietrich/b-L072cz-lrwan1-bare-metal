@@ -1,0 +1,35 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Launch",
+            "cwd": "${workspaceFolder}",
+            "executable": "build/b-l027cz-lrwan1.elf",
+            "request": "launch",
+            "type": "cortex-debug",
+            "servertype": "openocd",
+            "device": "stm32l072cz",
+            "runToEntryPoint": "main", /* Reset_Handler */
+            "configFiles": [
+                "interface/stlink.cfg",
+                "target/stm32l0.cfg"
+            ],
+            "svdFile": "${workspaceFolder}/res/STM32L0x1.svd"
+        },
+        {
+            "name": "Attach",
+            "cwd": "${workspaceFolder}",
+            "executable": "build/b-l027cz-lrwan1.elf",
+            "request": "attach",
+            "type": "cortex-debug",
+            "servertype": "openocd",
+            "device": "stm32l072cz",
+            "runToEntryPoint": "main", /* Reset_Handler */
+            "configFiles": [
+                "interface/stlink.cfg",
+                "target/stm32l0.cfg"
+            ],
+            "svdFile": "${workspaceFolder}/res/STM32L0x1.svd"
+        }
+    ]
+}
